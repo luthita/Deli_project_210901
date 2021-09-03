@@ -14,4 +14,6 @@ startDate : 2021/09/01 (~ 진행중)
 
 * 프로젝트 URL 설계
   * [URL 설계 Link!](https://docs.google.com/spreadsheets/d/1QjXubuThmLomBp4M6U_rc2xGJV8dZ16J1i2C2SKwbBw/edit#gid=606285945, "URL 설계")
+* 프로젝트 프로토타이핑
+  * [화면 정의 Link!](https://ovenapp.io/view/j7fKK6JcomnQl3GcgcwKNDQ5509fwhbl/, "프로토타이핑")
 <hr>
