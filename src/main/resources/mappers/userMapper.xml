@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.luthita.user.dao.UserDAO">
+ 	<select id="selectUserByLoginId" parameterType="String" resultType="com.luthita.user.model.User">
+        SELECT
+           `id`
+           , `loginId`
+           , `password`
+           , `userName`
+           , `email`
+           , `address`
+           , `createdAt`
+           , `updatedAt`
+        FROM
+            `user`
+        WHERE
+        	`loginId` = #{loginId}
+    </select>
+ </mapper>

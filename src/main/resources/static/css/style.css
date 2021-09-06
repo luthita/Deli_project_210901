@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+#wrap{width:1200px; margin:auto;}
+
+header{height:100px; background:#2C558E;}
+header .logo{width:300px;}
+header .login-info{width:900px;}
+footer{height: 100px;}
+
+.sign-up-box {width:500px; background-color:#F2F2F2; box-shadow:3px 3px 3px 3px #BDC0C0;}
+.sign-up-subject {margin:20px; font-weight:bold;}
+
+.login-box {width:300px;}
+
+.container {
+  width: 100%;
+  height: 720px;
+  
+  text-align: center;
+  position: relative;
+}
+.container::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: url(../images/sign_in_1.jpg);
+  background-size:cover;
+  background-position:center;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.5;
+}
+.bgImage{
+	width: 100%;
+ 	height: 100%;
+	position: relative;
+	background-position:center;
+
+}
+.bgImage::after{
+  width: 100%;
+  height: 100%;
+  background: url(../images/sign_in_1.jpg);
+  background-size:100%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  content:"";
+}
+.fontJua{
+	font-family: 'Jua', cursive;
+}
+
+.textO1{color:#F29F05;}
+.textO2{color:#F28705;}
+.textO3{color:#F25C05;}
+.textO4{color:#D93D04;}
+.textGray{color:#F2F2F2;}
+.bgO1{background:#F29F05;}
+.bgO2{background:#F28705;}
+.bgO3{background:#F25C05;}
+.bgO4{background:#D93D04;}
