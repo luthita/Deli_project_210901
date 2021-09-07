@@ -48,4 +48,35 @@
 		</div>
 	</div>
 </body>
+<script>
+	$(document).ready(function(){
+		$('#loginForm').submit(function(e){
+			e.preventDefault();
+			
+			// validation
+			let loginId = $('#loginId').val().trim();
+			if(loginId == ''){
+				alert("아이디를 입력하세요");
+				return;
+			}
+			
+			let password = $('#password').val();
+			if(password == ''){
+				alert("비밀번호를 입력하세요.");
+				return;
+			}
+			
+			let url = $(this).attr('action');
+			let data = $(this).serialize();
+			
+			$.post(url, data).done(function(data){
+				if(data.result == 'success'){
+					location.href="/main/main_view";
+				} else{
+					alert("로그인에 실패했습니다. 다시 시도 해주세요");
+				}
+			});
+		});
+	});
+</script>
 </html>

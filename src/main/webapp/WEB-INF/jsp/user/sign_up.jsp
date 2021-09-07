@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<th class="bgGrey">* 이름</th>
-					<td><input type="text" id="name" name="name" class="form-control" placeholder="이름(닉네임)을 입력하세요."></td>
+					<td><input type="text" id="userName" name="userName" class="form-control" placeholder="이름(닉네임)을 입력하세요."></td>
 				</tr>
 				<tr>
 					<th class="bgGrey">* 이메일</th>
@@ -44,7 +44,7 @@
 			</table>
 			<br>
 		
-			<button type="submit" id="signUpBtn" class="btn btn-primary float-right">회원가입</button>
+			<button type="submit" id="signUpBtn" class="btn btn-primary float-right mb-3 mr-3">회원가입</button>
 		</form>
 	</div>
 </div>
@@ -81,8 +81,67 @@
 				}
 				
 			});
-			
 		});
 		
+		$('#signUpForm').submit(function(e){
+			e.preventDefault();
+			
+			// validation
+			let loginId = $('#loginId').val().trim();
+			if(loginId == ''){
+				alert('아이디를 입력하세요');
+				return;
+			}
+			
+			let password = $('#password').val();
+			let confirmPassword = $('#confirmPassword').val();
+			if(password == ''){
+				alert('패스워드를 입력하세요');
+				return;
+			}
+			if(confirmPassword != password){
+				alert('비밀번호가 일치하지 않습니다.');
+				$('#password').val('');
+				$('#confirmPassword').val('');
+				return;
+			}
+			
+			let userName = $('#userName').val().trim();
+			if(userName == ''){
+				alert('이름을 입력하세요.');
+				return;
+			}
+			
+			let email = $('#email').val().trim();
+			if(email == ''){
+				alert('이메일을 입력하세요.');
+				return;
+			}
+			
+			let address = $('#address').val().trim();
+			if(address == ''){
+				alert('주소를 입력하세요.');
+				return;
+			}
+			
+			if($('#idCheckOk').hasClass('d-none')){
+				alert("아이디 중복확인을 해주세요.");
+				return;
+			}
+			
+			let url = "/user/sign_up";
+			
+			// 폼 태그 안의 name 들이 input(requestParam)으로 구성
+			let data = $(this).serialize();
+			
+			$.post(url, data).done(function(data){
+				if(data.result == "success"){
+					alert("DeliEats 회원가입을 환영합니다. ")
+					location.href="/user/sign_in_view";
+				} else{
+					alert("가입에 실패했습니다. 다시 시도해주세요.")
+				}
+			});
+		});
 	});
 </script>

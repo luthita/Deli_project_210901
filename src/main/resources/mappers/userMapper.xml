@@ -18,4 +18,44 @@
         WHERE
         	`loginId` = #{loginId}
     </select>
+    
+    <insert id="insertUser" parameterType="map">
+		INSERT INTO `user`
+		(
+			`loginId`
+           , `password`
+           , `userName`
+           , `email`
+           , `address`
+           , `createdAt`
+           , `updatedAt`
+		)
+		VALUES
+		(
+			#{loginId}
+			, #{password}
+			, #{userName}
+			, #{email}
+			, #{address}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<select id="selectUserByLoginIdAndPassword" parameterType="map" resultType="com.luthita.user.model.User">
+        SELECT
+           `id`
+           , `loginId`
+           , `password`
+           , `userName`
+           , `email`
+           , `address`
+           , `createdAt`
+           , `updatedAt`
+        FROM
+            `user`
+        WHERE
+        	`loginId` = #{loginId}
+        	AND `password` = #{password}
+    </select>
  </mapper>
