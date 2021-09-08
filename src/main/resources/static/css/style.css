@@ -49,6 +49,7 @@ footer{height: 100px;}
   z-index: -1;
   content:"";
 }
+
 .bgImage2{
 	width: 30%;
 	position: relative;
@@ -56,6 +57,24 @@ footer{height: 100px;}
 
 }
 .bgImage2::after{
+  width: 100%;
+  height: 100%;
+  background: url(../images/sign_in_3.jpg);
+  background-size:100%;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  content:"";
+}
+.bgImage2_size{
+	width: 40%;
+	position: relative;
+	background-position:center;
+
+}
+.bgImage2_size::after{
   width: 100%;
   height: 100%;
   background: url(../images/sign_in_3.jpg);

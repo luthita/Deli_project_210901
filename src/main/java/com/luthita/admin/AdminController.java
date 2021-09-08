@@ -9,8 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
 	@RequestMapping("/sign_in_view")
-	public String signInView(Model model) {
-		model.addAttribute("viewName","admin/sign_in");
+	public String signInView() {
+		
+		return "admin/sign_in";
+	}
+	
+	@RequestMapping("sign_up_view")
+	public String signUpView() {
+		
+		return "admin/sign_up";
+	}
+	
+	@RequestMapping("main_view")
+	public String mainView(Model model) {
+		model.addAttribute("viewName","admin/main");
 		
 		return "template/layout";
 	}
