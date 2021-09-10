@@ -26,4 +26,9 @@ public class AdminController {
 		
 		return "template/layout";
 	}
+	
+	@RequestMapping("store_sign_up_view")
+	public String storeSignUpView() {
+		return "admin/store_sign_up";
+	}
 }

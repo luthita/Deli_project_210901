@@ -6,22 +6,31 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.luthita.admin.bo.AdminBO;
 import com.luthita.admin.model.Admin;
 import com.luthita.common.EncryptUtils;
+import com.luthita.store.bo.StoreBO;
+import com.luthita.store.model.Store;
 
 @RequestMapping("/admin")
 @RestController
 public class AdminRestController {
-
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private AdminBO adminBO;
+	
+	@Autowired
+	private StoreBO storeBO;
 	
 	@RequestMapping("/is_duplicated_id")
 	public Map<String,Boolean> isDuplicated(
@@ -55,6 +64,8 @@ public class AdminRestController {
 		return result;
 	}
 	
+	
+	
 	@PostMapping("/sign_in")
 	public Map<String, String> signIn(
 			@RequestParam("loginId") String loginId,
@@ -68,8 +79,16 @@ public class AdminRestController {
 		Map<String, String> result = new HashMap<>();
 		if(admin != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("userLoginId", admin.getLoginId());
-			session.setAttribute("userId", admin.getId());
+			session.setAttribute("adminLoginId", admin.getLoginId());
+			session.setAttribute("adminId", admin.getId());
+			
+			// 해당 admin 계정에 가게가 등록이 되어 있다면 세션 existStore 에 true 
+			Store existStore = storeBO.existStoreByAdminId(admin.getId());
+			if(existStore != null) {
+				session.setAttribute("existStore", true);
+			} else {
+				session.setAttribute("existStore", false);
+			}
 			
 			result.put("result", "success");
 		} else {
@@ -78,5 +97,35 @@ public class AdminRestController {
 		}
 		return result;
 		
+	}
+	
+	@PostMapping("/store_sign_up")
+	public Map<String, String> storeSignUp(
+			@RequestParam("storeName") String storeName,
+			@RequestParam("address") String address,
+			@RequestParam("introduce") String introduce,
+			@RequestParam("phoneNumber") String phoneNumber,
+			@RequestParam("kinds") String kinds,
+			@RequestParam(value = "file", required = false) MultipartFile logoFile,
+			HttpServletRequest request){
+		
+		Map<String,String> result = new HashMap<>();
+		HttpSession session = request.getSession();
+		Integer adminId = (Integer) session.getAttribute("adminId");
+		if(adminId == null) {
+			result.put("result","error");
+			logger.error("[가게등록] 로그인 세션이 없습니다.");
+			return result;
+		}
+		
+		int row = storeBO.createStore(adminId, storeName, address, introduce, phoneNumber, kinds, logoFile);
+		if(row > 0) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "error");
+			logger.error("[가게등록] 가게등록을 완료하지 못했습니다.");
+		}
+		
+		return result;
 	}
 }

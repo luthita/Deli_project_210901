@@ -86,8 +86,79 @@ footer{height: 100px;}
   z-index: -1;
   content:"";
 }
+
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .fontJua{
-	font-family: 'Jua', cursive;
+	font-family:'BMJUA';
+}
+.filebox input[type="file"] { 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0; } 
+.filebox label { 
+	display: inline-block; 
+	padding: .5em .75em; 
+	color: #fff; 
+	font-size: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #F29F05; 
+	cursor: pointer; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; } /* named upload */ 
+.filebox .upload-name { 
+	display: inline-block; 
+	padding: .5em .75em; /* label의 패딩값과 일치 */ 
+	font-size: inherit; 
+	font-family: inherit; 
+	line-height: normal; 
+	vertical-align: middle;
+	background-color: #fff; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; 
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+	-moz-appearance: none; 
+	appearance: none; }
+	
+/* imaged preview */ 
+.filebox .upload-display { /* 이미지가 표시될 지역 */ 
+	margin-bottom: 5px; 
+} 
+
+@media(min-width: 768px) { 
+	.filebox .upload-display { 
+	display: inline-block; 
+	margin-right: 5px; 
+	margin-bottom: 0; 
+	} 
+} 
+
+.filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */ 
+	display: inline-block;
+	width: 54px; 
+	padding: 2px; 
+	vertical-align: middle; 
+	border: 1px solid #ddd; 
+	border-radius: 5px;
+	background-color: #fff; 
+} 
+.filebox .upload-display img { /* 추가될 이미지 */ 
+	display: block; 
+	max-width: 100%; 
+	width: 100% \9; 
+	height: auto; 
 }
 
 .textO1{color:#F29F05;}
@@ -99,3 +170,4 @@ footer{height: 100px;}
 .bgO2{background:#F28705;}
 .bgO3{background:#F25C05;}
 .bgO4{background:#D93D04;}
+.bgGray{background:#F2F2F2;}

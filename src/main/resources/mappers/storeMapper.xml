@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.luthita.store.dao.StoreDAO">
+ 	<select id="selectStoreByAdminId"   parameterType="int" resultType="com.luthita.store.model.Store">
+        SELECT
+            `id` ,
+			`adminId`, 
+			`storeName`, 
+			`address`,
+			`introduce`, 
+			`phoneNumber`, 
+			`kinds`,
+			`logoImagePath`, 
+			`createdAt`,
+			`updatedAt`
+        FROM
+            `store`
+        WHERE
+        	`adminId` = #{adminId}
+    </select>
+    
+    <insert id="insertStore" parameterType="map">
+		INSERT INTO `store`
+		(
+			`adminId`,
+			`storeName`, 
+			`address`, 
+			`introduce`, 
+			`phoneNumber`, 
+			`kinds`, 
+			`logoImagePath`,
+			`createdAt`,
+			`updatedAt`
+		)
+		VALUES
+		(
+			#{adminId}
+			, #{storeName}
+			, #{address}
+			, #{introduce}
+			, #{phoneNumber}
+			, #{kinds}
+			, #{logoImagePath}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+</mapper>

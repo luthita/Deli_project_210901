@@ -11,7 +11,7 @@
 		<%-- url에 admin 이 포함되어 있으면 사장님 광장 gnb 로 출력 --%>
 		<c:when test="${fn:contains(path, 'admin')}">
 			<div class="logo">
-				<h1 class="textGray p-4 font-weight-bold fontJua">사장님광장</h1>
+				<h1 class="textGray p-4 fontJua">사장님광장</h1>
 			</div>
 			<c:if test="${empty userName }">
 				<div class="login-info d-flex justify-content-end align-items-center">
@@ -35,13 +35,4 @@
 			</c:if>
 		</c:otherwise>
 	</c:choose>
-	
-	
-	
-	<c:if test="${fn:contains(URL, 'admin')}">
-	
-	</c:if>
-	
-	
-	
 </div>

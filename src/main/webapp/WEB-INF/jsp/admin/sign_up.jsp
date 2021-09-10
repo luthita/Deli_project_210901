@@ -24,7 +24,7 @@
 	<div class="d-flex justify-content-center align-items-center p-5">
 		<div class="bgImage2_size">
 			<h1 class="mb-4 mt-4 fontJua ml-3">회원가입</h1>
-			<form id="signUpForm" method="post" action="/admin/sign_up_for_submit">
+			<form id="signUpForm" method="post">
 				<table class="sign-up-table table table-bordered">
 					<tr>
 						<th class="bgGrey">* 아이디(4자 이상)<br></th>
