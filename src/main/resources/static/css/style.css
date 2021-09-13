@@ -161,6 +161,16 @@ footer{height: 100px;}
 	height: auto; 
 }
 
+
+.menuTable{
+	width:800px;
+}
+.imageScale{
+  transition: all 0.2s linear;
+}
+.imageScale:hover{
+  transform: scale(2.4);
+}
 .textO1{color:#F29F05;}
 .textO2{color:#F28705;}
 .textO3{color:#F25C05;}

@@ -118,6 +118,7 @@ $(document).ready(function(){
     });
     
     $('#storeSignUpForm').submit(function(e){
+    	e.preventDefault();
     	
     	// validation
 		let storeName = $('#storeName').val().trim();
@@ -162,18 +163,16 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false,
 			success: function(data){
-				alert("success");
 				if(data.result == 'success'){
 					alert("가게 등록이 되셨습니다.");
-					location.href="/admin/main_view";
+					location.href="/admin/sign_in_view";
+					alert("다시 로그인해주십시오")
 				}else{
 					alert("fail");
 				}
 			},error: function(jqXHR, textStatus, errorThrown) {
 				var errorMsg = jqXHR.responseJSON.status;
 				alert(errorMsg + ":" + textStatus);
-			}, complete: function(){
-				alert("complete");
 			}
 		});
     });

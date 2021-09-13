@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.luthita.admin.bo.AdminBO;
 import com.luthita.admin.model.Admin;
 import com.luthita.common.EncryptUtils;
+import com.luthita.menu.bo.MenuBO;
 import com.luthita.store.bo.StoreBO;
 import com.luthita.store.model.Store;
 
@@ -31,6 +32,9 @@ public class AdminRestController {
 	
 	@Autowired
 	private StoreBO storeBO;
+	
+	@Autowired
+	private MenuBO menuBO;
 	
 	@RequestMapping("/is_duplicated_id")
 	public Map<String,Boolean> isDuplicated(
@@ -86,6 +90,9 @@ public class AdminRestController {
 			Store existStore = storeBO.existStoreByAdminId(admin.getId());
 			if(existStore != null) {
 				session.setAttribute("existStore", true);
+				session.setAttribute("storeId", existStore.getId());
+				session.setAttribute("storeName", existStore.getStoreName());
+				session.setAttribute("kinds", existStore.getKinds());
 			} else {
 				session.setAttribute("existStore", false);
 			}
@@ -112,6 +119,9 @@ public class AdminRestController {
 		Map<String,String> result = new HashMap<>();
 		HttpSession session = request.getSession();
 		Integer adminId = (Integer) session.getAttribute("adminId");
+		
+		
+		
 		if(adminId == null) {
 			result.put("result","error");
 			logger.error("[가게등록] 로그인 세션이 없습니다.");
@@ -127,5 +137,48 @@ public class AdminRestController {
 		}
 		
 		return result;
+	}
+	
+	@PostMapping("/menu_create")
+	public Map<String, String> menuCreate(
+			@RequestParam("name") String name,
+			@RequestParam("price") int price,
+			@RequestParam(value = "file", required = false) MultipartFile imageFile,
+			HttpServletRequest request){
+		
+		Map<String,String> result = new HashMap<>();
+		HttpSession session = request.getSession();
+		
+		Integer storeId = (Integer) session.getAttribute("storeId");
+		
+		if(storeId == null) {
+			result.put("result", "error");
+			logger.error("[가게등록] 등록된 가게 세션이 없습니다.");
+			return result;
+		}
+		int row = menuBO.createMenu(storeId, name, price, imageFile);
+		if(row > 0 ){
+			result.put("result", "success");
+		} else {
+			result.put("result", "error");
+			logger.error("[메뉴등록] 메뉴 등록을 완료하지 못했습니다.");
+		}
+		return result;
+	}
+	
+	@PostMapping("/delete_menu")
+	public Map<String, String> deleteMenu(
+			@RequestParam("id") int id){
+		
+		Map<String, String> result = new HashMap<>();
+		int row = menuBO.deleteMenu(id);
+		if(row > 0 ) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "error");
+		}
+		
+		return result;
+		
 	}
 }

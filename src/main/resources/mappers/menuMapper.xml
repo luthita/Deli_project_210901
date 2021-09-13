@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.luthita.menu.dao.MenuDAO">
+ 	<select id="selectMenuList" resultType="com.luthita.menu.model.Menu">
+ 		SELECT
+ 			`id`
+ 			, `storeId`
+ 			, `name`
+ 			, `price`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`menu`
+ 		
+ 	</select>
+ 	<insert id="insertMenu" parameterType="map">
+		INSERT INTO `menu`
+		(
+			`storeId`,
+			`name`, 
+			`price`, 
+			`imagePath`, 
+			`createdAt`,
+			`updatedAt`
+		)
+		VALUES
+		(
+			#{storeId}
+			, #{name}
+			, #{price}
+			, #{imagePath}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<delete id="deleteMenu" parameterType="int">
+		DELETE
+		FROM
+			`menu`
+		WHERE
+			`id` = #{id}
+	</delete>
+	
+	<select id="selectMenu"  resultType="com.luthita.menu.model.Menu">
+		SELECT
+ 			`id`
+ 			, `storeId`
+ 			, `name`
+ 			, `price`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`menu`
+ 		WHERE
+ 			`id` = #{id}
+	</select>
+ </mapper>
