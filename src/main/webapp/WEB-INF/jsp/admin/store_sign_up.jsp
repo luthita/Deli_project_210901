@@ -41,8 +41,8 @@
 			<strong>카테고리</strong><br>
 			<select name="kinds" id="kinds" class="form-control">
 				<option>카테고리</option>
-				<option value="korean">한식</option>
-				<option value="chickenPizza">치킨/피자</option>
+				<option value="korean">분식</option>
+				<option value="chickenpizza">치킨/피자</option>
 				<option value="chinese">중식</option>
 				<option value="japanese">일식/돈가츠</option>
 				<option value="nightfood">야식</option>

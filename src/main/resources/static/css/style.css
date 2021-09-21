@@ -171,11 +171,56 @@ footer{height: 100px;}
 .imageScale:hover{
   transform: scale(2.4);
 }
+a:hover{
+	color:#F2F2F2
+}
+.categoryBox {
+    width: 100px;
+    height: 100px; 
+    border-radius: 70%;
+}
+.category {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.storeBox{
+	width: 750px;
+	height: 150px;
+	border:4px solid #FFDEAD;
+	border-radius: 30px;
+	
+}
+.storeLogoBox{
+	width:125px;
+	height:125px;
+}
+.storeLogo{
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border:1px transparent;
+	border-radius: 30px;
+}
+.floBtn1 {
+  position: fixed;
+  top: 400px; /* 윗쪽 끝에서부터의 거리 */
+  right: 55%;
+  margin-right: -683px; /* 가운데를 기준으로 오른쪽 거리 */
+  z-index: 99;
+  width:80px;
+  height:80px;
+  border:1px transparent;
+  border-radius: 30px;
+  background:#F29F05;
+  color:#F2F2F2;
+}
 .textO1{color:#F29F05;}
 .textO2{color:#F28705;}
 .textO3{color:#F25C05;}
 .textO4{color:#D93D04;}
 .textGray{color:#F2F2F2;}
+.bgO0{background: #FFDEAD};
 .bgO1{background:#F29F05;}
 .bgO2{background:#F28705;}
 .bgO3{background:#F25C05;}

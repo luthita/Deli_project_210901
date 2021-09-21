@@ -11,6 +11,8 @@ public class Store {
 	private String phoneNumber; 
 	private String kinds; 
 	private String logoImagePath; 
+	private int deliveryFee;
+	private int minimumPrice;
 	private Date createdAt; 
 	private Date updatedAt;
 	public int getId() {
@@ -24,6 +26,18 @@ public class Store {
 	}
 	public void setAdminId(int adminId) {
 		this.adminId = adminId;
+	}
+	public int getDeliveryFee() {
+		return deliveryFee;
+	}
+	public void setDeliveryFee(int deliveryFee) {
+		this.deliveryFee = deliveryFee;
+	}
+	public int getMinimumPrice() {
+		return minimumPrice;
+	}
+	public void setMinimumPrice(int minimumPrice) {
+		this.minimumPrice = minimumPrice;
 	}
 	public String getStoreName() {
 		return storeName;

@@ -24,8 +24,8 @@ public class MenuBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 	
-	public List<Menu> getMenuList(){
-		return menuDAO.selectMenuList();
+	public List<Menu> getMenuList(int storeId){
+		return menuDAO.selectMenuListByStoreId(storeId);
 	}
 	
 	public int createMenu(int storeId, String name, int price, MultipartFile imageFile) {

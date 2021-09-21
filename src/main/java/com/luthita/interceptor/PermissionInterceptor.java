@@ -23,14 +23,31 @@ public class PermissionInterceptor implements HandlerInterceptor{
 
 		// 세션 확인 => 있으면 로그인 된 상태
 		HttpSession session = request.getSession();
+		String adminLoginId = (String)session.getAttribute("adminLoginId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
-		
 		
 		// URI - url path 확인
 		String uri = request.getRequestURI();
 		logger.info("##### uri : " + uri);
 		
+		// admin 관련 
 		
+		// 비 로그인 && /post		=> 로그인 페이지로 리다이렉트
+		if(adminLoginId == null && (uri.contains("/admin/main_view")|| uri.contains("/admin/menu")|| uri.startsWith("/admin/store"))) {
+			response.sendRedirect("/admin/sign_in_view");
+			return false;
+		}
+		// 로그인 && /user		=> 포스트 페이지로 리다이렉트
+		if(adminLoginId != null && uri.startsWith("/admin/sign_in_view")) {
+			response.sendRedirect("/admin/main_view");
+			return false;
+		}
+		
+		
+		if(userLoginId != null && (uri.startsWith("/user/sign_in_view"))) {
+			response.sendRedirect("/main/main_view");
+			return false;
+		}
 		return true;
 	}
 	

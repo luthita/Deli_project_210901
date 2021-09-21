@@ -10,7 +10,7 @@ import com.luthita.menu.model.Menu;
 @Repository
 public interface MenuDAO {
 
-	public List<Menu> selectMenuList();
+	public List<Menu> selectMenuListByStoreId(int storeId);
 	
 	public int deleteMenu(int id);
 	

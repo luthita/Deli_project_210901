@@ -13,12 +13,34 @@
 			`phoneNumber`, 
 			`kinds`,
 			`logoImagePath`, 
+			`deliveryFee`,
+			`minimumPrice`,
 			`createdAt`,
 			`updatedAt`
         FROM
             `store`
         WHERE
         	`adminId` = #{adminId}
+    </select>
+    
+    <select id="selectStoreById" parameterType="int" resultType="com.luthita.store.model.Store">
+        SELECT
+            `id` ,
+			`adminId`, 
+			`storeName`, 
+			`address`,
+			`introduce`, 
+			`phoneNumber`, 
+			`kinds`,
+			`logoImagePath`, 
+			`deliveryFee`,
+			`minimumPrice`,
+			`createdAt`,
+			`updatedAt`
+        FROM
+            `store`
+        WHERE
+        	`id` = #{id}
     </select>
     
     <insert id="insertStore" parameterType="map">
@@ -31,6 +53,8 @@
 			`phoneNumber`, 
 			`kinds`, 
 			`logoImagePath`,
+			`deliveryFee`,
+			`minimumPrice`,
 			`createdAt`,
 			`updatedAt`
 		)
@@ -43,8 +67,29 @@
 			, #{phoneNumber}
 			, #{kinds}
 			, #{logoImagePath}
+			, 0
+			, 0
 			, NOW()
 			, NOW()
 		)
 	</insert>
+	<select id="selectStoreListByKinds"  resultType="com.luthita.store.model.Store">
+        SELECT
+            `id` ,
+			`adminId`, 
+			`storeName`, 
+			`address`,
+			`introduce`, 
+			`phoneNumber`, 
+			`kinds`,
+			`logoImagePath`, 
+			`deliveryFee`,
+			`minimumPrice`,
+			`createdAt`,
+			`updatedAt`
+        FROM
+            `store`
+        WHERE
+        	`kinds` = #{kinds}
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.luthita.store.bo;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ public class StoreBO {
 	public Store existStoreByAdminId(int adminId) {
 		return storeDAO.selectStoreByAdminId(adminId);
 	}
+	public Store getStore(int id) {
+		return storeDAO.selectStoreById(id); 
+	}
 	
 	public int createStore(int adminId, String storeName, String address, String introduce, String phoneNumber, String kinds, MultipartFile logoFile) {
 		
@@ -40,4 +44,8 @@ public class StoreBO {
 		
 		return storeDAO.insertStore(adminId, storeName, address, introduce, phoneNumber, kinds, logoImagePath);
 	}
+	
+	public List<Store> getStoreListByKinds(String kinds){
+		return storeDAO.selectStoreListByKinds(kinds);
+	};
 }
