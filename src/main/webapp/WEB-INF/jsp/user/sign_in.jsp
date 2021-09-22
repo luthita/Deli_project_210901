@@ -24,7 +24,7 @@
 	<div class="container d-flex align-items-center justify-content-center">
 		<div class="border border-dark p-5 bg-light">
 			<h1 class="m-5 fontJua">Deli Eats</h1>
-			<form id="loginForm" method="post" action="/admin/sign_in">
+			<form id="loginForm" method="post" action="/user/sign_in">
 				<div class="input-group mb-3">
 					<%-- input-group-prepend : input 앞에 ID 부분을 회색으로 붙인다. --%>
 					<div class="input-group-prepend">

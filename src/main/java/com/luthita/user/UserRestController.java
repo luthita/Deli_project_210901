@@ -16,8 +16,9 @@ import com.luthita.common.EncryptUtils;
 import com.luthita.user.bo.UserBO;
 import com.luthita.user.model.User;
 
-@RequestMapping("/user")
+ 
 @RestController
+@RequestMapping("/user")
 public class UserRestController {
 
 	@Autowired

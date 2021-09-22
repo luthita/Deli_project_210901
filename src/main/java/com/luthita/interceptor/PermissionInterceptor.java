@@ -44,8 +44,8 @@ public class PermissionInterceptor implements HandlerInterceptor{
 		}
 		
 		
-		if(userLoginId != null && (uri.startsWith("/user/sign_in_view"))) {
-			response.sendRedirect("/main/main_view");
+		if(userLoginId == null && (uri.startsWith("/main"))) {
+			response.sendRedirect("/user/sign_in_view");
 			return false;
 		}
 		return true;

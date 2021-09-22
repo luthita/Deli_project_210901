@@ -25,7 +25,7 @@
 	        </thead>
 	        <tbody>
 	        	<c:forEach var="menu" items="${menuList}">
-	            <tr data-menu-id="${menu.id}" data-menu-image="${menu.imagePath}"data-toggle="modal" data-target="#menuModal">
+	            <tr data-menu-id="${menu.id}" data-menu-image="${menu.imagePath}" data-menu-name="${menu.name }" data-menu-price="${menu.price }"data-toggle="modal" data-target="#menuModal">
 	            	<c:choose>
 		            	<c:when test="${menu.imagePath eq null}">
 		            		<td class="align-middle col-3"><img src="/static/images/noImage.png" width="100px" class="imageScale"></td>
@@ -64,13 +64,15 @@
          <div class="form-group">
            <h4 class="nameLabel"></h4>
            <img src="#" alt="메뉴 사진" id="menuImage" width="100px" class="my-3 ml-3"><br>
+           <span class="menuPrice"></span><br>
            개수 : <input type="number" name="count" id="count" min="1" max="10">
-           <strong class="totalPrice"></strong>
+           <hr>
+           <h4 class="textO4 totalPrice"></h4>
          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn bgGray" data-dismiss="modal">닫기</button>
-        <button type="submit" class="btn bgO2 text-white" id="menuSubmit">담기</button>
+        <button type="button" class="btn bgO2 text-white" id="menuSubmit">담기</button>
       </div>
     </div>
   </div>
@@ -96,9 +98,10 @@ $(document).ready(function(){
 		 });
 		
 		// td.eq(index)를 통해 값을 가져올 수도 있다.
+		var menuId = $(this).data('menu-id');
 		var image = $(this).data('menu-image');
-		var name = td.eq(1).text();
-		var price = td.eq(2).text();
+		var name = $(this).data('menu-name');
+		var price = $(this).data('menu-price');
 		
 		
 		if(image.trim() == ''){
@@ -107,7 +110,35 @@ $(document).ready(function(){
 		
 		$('#menuImage').attr("src", image);
 		$('.nameLabel').html(name);
+		$('.menuPrice').html("가격 : " + price);
 		
+		$('#count').change(function(){
+			let count = $('#count').val();
+			$('.totalPrice').html("총 금액 : " + price * count + "원");
+		});
+		
+		
+		$('#menuSubmit').click(function(){
+			var count = $('#count').val();
+			
+			// alert(name + price + count);
+			
+			$.ajax({
+				url: '/main/add_basket',
+				type: 'POST',
+				data: {"menuId":menuId,
+						"count":count},
+				success:function(data){
+					if(data.result == 'success'){
+	    				alert("장바구니에 담았습니다.");
+	    				location.reload();
+	    			}
+	    		}, error: function(e){
+	    			alert("error" + e.message);
+	    		}
+			});
+		});
 	});
+	
 });
 </script>
