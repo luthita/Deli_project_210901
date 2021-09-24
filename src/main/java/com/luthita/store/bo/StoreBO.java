@@ -48,4 +48,5 @@ public class StoreBO {
 	public List<Store> getStoreListByKinds(String kinds){
 		return storeDAO.selectStoreListByKinds(kinds);
 	};
+	
 }

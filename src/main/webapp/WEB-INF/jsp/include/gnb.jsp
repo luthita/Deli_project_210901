@@ -32,7 +32,7 @@
 		<%-- url에 admin 이 포함되어 있지 않으면 Deli Eats gnb 로 출력 --%>
 		<c:otherwise>
 			<div class="logo">
-				<h1 class="textGray p-4 font-weight-bold fontJua">Deli Eats</h1>
+				<a href="/main/main_view"><h1 class="textGray p-4 font-weight-bold fontJua">Deli Eats</h1></a>
 			</div>
 			<c:if test="${empty userLoginId }">
 				<div class="login-info d-flex justify-content-end align-items-center">

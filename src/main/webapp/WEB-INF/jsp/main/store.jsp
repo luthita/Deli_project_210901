@@ -45,7 +45,7 @@
 
 <%-- 플로팅 버튼(주문) --%>
 <div class="floBtn1 hidden-md hidden-sm hidden-xs d-flex justify-content-center align-items-center">
-  <a href="#" target="_blank">
+  <a href="/main/basket_view" target="_blank">
     <span><i class="fa fa-shopping-cart fa-3x text-white" aria-hidden="true"></i></span>
   </a>
 </div>
@@ -127,10 +127,15 @@ $(document).ready(function(){
 				url: '/main/add_basket',
 				type: 'POST',
 				data: {"menuId":menuId,
+						"name":name,
+						"price":price,
 						"count":count},
 				success:function(data){
 					if(data.result == 'success'){
 	    				alert("장바구니에 담았습니다.");
+	    				location.reload();
+	    			} else if(data.result == 'incorrect'){
+	    				alert("한 가게의 메뉴만 담아주세요.");
 	    				location.reload();
 	    			}
 	    		}, error: function(e){

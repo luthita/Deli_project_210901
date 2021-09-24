@@ -64,4 +64,14 @@ public class MenuBO {
 		}
 		return menuDAO.deleteMenu(id);
 	}
+
+	public boolean isSameStore(int menuId, int lastMenuId) {
+		int nowStoreId = menuDAO.selectStoreIdByMenuId(menuId);
+		int lastStoreId = menuDAO.selectStoreIdByMenuId(lastMenuId);
+		if(nowStoreId == lastStoreId) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

@@ -215,14 +215,22 @@ a:hover{
   background:#F29F05;
   color:#F2F2F2;
 }
+.basketBox{
+	width:600px;
+}
+.orderBox{
+	width:600px;
+}
 .textO1{color:#F29F05;}
 .textO2{color:#F28705;}
 .textO3{color:#F25C05;}
 .textO4{color:#D93D04;}
 .textGray{color:#F2F2F2;}
+.textGray2{color:#777;}
 .bgO0{background: #FFDEAD};
 .bgO1{background:#F29F05;}
 .bgO2{background:#F28705;}
 .bgO3{background:#F25C05;}
 .bgO4{background:#D93D04;}
 .bgGray{background:#F2F2F2;}
+.bgYellow{background:#ffd400;}

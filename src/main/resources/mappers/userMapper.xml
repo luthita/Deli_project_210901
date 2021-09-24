@@ -18,6 +18,21 @@
         WHERE
         	`loginId` = #{loginId}
     </select>
+    <select id="selectUserById" parameterType="int" resultType="com.luthita.user.model.User">
+        SELECT
+           `id`
+           , `loginId`
+           , `password`
+           , `userName`
+           , `email`
+           , `address`
+           , `createdAt`
+           , `updatedAt`
+        FROM
+            `user`
+        WHERE
+        	`id` = #{id}
+    </select>
     
     <insert id="insertUser" parameterType="map">
 		INSERT INTO `user`

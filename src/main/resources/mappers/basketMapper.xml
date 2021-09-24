@@ -8,6 +8,8 @@
 		(
 			`userId`,
 			`menuId`, 
+			`name`,
+			`price`,
 			`count`, 
 			`createdAt`
 		)
@@ -15,8 +17,42 @@
 		(
 			#{userId}
 			, #{menuId}
+			, #{name}
+			, #{price}
 			, #{count}
 			, NOW()
 		)
  	</insert>
+ 	<select id="selectBasketListByUserId" resultType="com.luthita.basket.model.Basket">
+ 		SELECT
+ 			`id`,
+ 			`userId`,
+			`menuId`, 
+			`name`,
+			`price`,
+			`count`, 
+			`createdAt`
+ 		FROM
+ 			`basket`
+ 		WHERE
+ 			`userId` = #{userId}
+ 		
+ 	</select>
+ 	<delete id="deleteBasket" parameterType="int">
+ 		DELETE 
+ 		FROM
+ 			`basket`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ 	<select id="selectLastMenuId" resultType="int">
+ 		SELECT
+ 			`menuId`
+ 		FROM
+ 			`basket`
+ 		WHERE
+ 			`userId` = #{userId}
+ 		ORDER BY `id` DESC
+ 		LIMIT 1
+ 	</select>
  </mapper>

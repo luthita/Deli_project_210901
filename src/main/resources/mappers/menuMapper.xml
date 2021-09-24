@@ -39,6 +39,15 @@
 		)
 	</insert>
 	
+	<select id="selectStoreIdByMenuId" resultType="int">
+    	SELECT
+    		`storeId`
+    	FROM
+    		`menu`
+    	WHERE
+    		`id` = #{id}
+    </select>
+    
 	<delete id="deleteMenu" parameterType="int">
 		DELETE
 		FROM
