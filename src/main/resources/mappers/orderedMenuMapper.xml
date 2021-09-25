@@ -19,4 +19,13 @@
 			, NOW()
 		)
 	</insert>
+	<select id="selectMenuIdAndCountByOrderId" resultType="map">
+		SELECT
+			`menuId`,
+			`count`
+		FROM
+			`orderedMenu`
+		WHERE
+			`orderId` = #{orderId}
+	</select>
 </mapper>

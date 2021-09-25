@@ -92,4 +92,13 @@
         WHERE
         	`kinds` = #{kinds}
     </select>
+    
+    <select id="selectStoreNameById" resultType="String">
+    	SELECT
+    		`storeName`
+    	FROM
+    		`store`
+    	WHERE
+    		`id` = #{id}
+    </select>
 </mapper>

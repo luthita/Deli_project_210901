@@ -157,7 +157,8 @@ public class MainRestController {
 		// 총 insert 횟수가 일치할 경우 success
 		if(total_row == param.size()) {
 			result.put("result", "success");
-			model.addAttribute("orderId",orderId);
+			String strOrderId = Integer.toString(orderId);
+			result.put("orderId", strOrderId);
 		} else {
 			result.put("result", "error");
 			logger.error("[주문하기] 주문을 완료하지 못했습니다.");

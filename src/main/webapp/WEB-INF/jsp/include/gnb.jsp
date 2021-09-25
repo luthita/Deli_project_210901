@@ -43,9 +43,19 @@
 			</c:if>
 			<c:if test="${not empty userLoginId }">
 			<div class="login-info d-flex justify-content-end align-items-center">
-				<div class="mt-5 mr-5">
-					<span class="textGray"><b>${userLoginId}</b>님 안녕하세요</span>
-					<a href="/user/sign_out" class="textGray font-weight-bold ml-3">로그아웃</a>
+				<div>
+					<div class="d-flex justify-content-end mr-5">
+						<div class="d-flex justify-content-end mr-2">
+							<a href="#" class="btn bgYellow text-dark w-100">찜 목록</a>
+						</div>
+						<div class="d-flex justify-content-end">
+							<a href="/main/orderedList_view" class="btn bgYellow text-dark w-100">주문내역</a>
+						</div>
+					</div>
+					<div class="mt-2 mr-5">
+						<span class="textGray"><b>${userLoginId}</b>님 안녕하세요</span>
+						<a href="/user/sign_out" class="textGray font-weight-bold ml-3">로그아웃</a>
+					</div>
 				</div>
 			</div>
 			</c:if>

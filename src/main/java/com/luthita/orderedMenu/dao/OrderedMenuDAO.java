@@ -1,5 +1,8 @@
 package com.luthita.orderedMenu.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +13,6 @@ public interface OrderedMenuDAO {
 			@Param("orderId") int orderId,
 			@Param("menuId") int menuId,
 			@Param("count") int count);
+	
+	public Map<String, Integer> selectMenuIdAndCountByOrderId(int orderId);
 }

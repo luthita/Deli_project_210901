@@ -25,4 +25,6 @@ public interface StoreDAO {
 			@Param("logoImagePath") String logoImagePath);
 	
 	public List<Store> selectStoreListByKinds(String kinds);
+	
+	public String selectStoreNameById(int id);
 }

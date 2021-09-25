@@ -27,10 +27,6 @@
 					<span class="textGray2"> * 개수 : ${basket.count}</span><br><br>
 					<h5><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${basket.price * basket.count}" />원</h5>
 				</div>
-				<hr>
-				<div class="d-flex justify-content-center align-items-center">
-					<a href="#"><strong class="textO2">╊ 더 담으러 가기</strong></a>
-				</div>
 			</div>
 			<c:set var="totalPrice" value="${totalPrice + basket.price * basket.count }"/>
 			

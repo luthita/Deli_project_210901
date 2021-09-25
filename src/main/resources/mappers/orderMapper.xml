@@ -34,4 +34,19 @@
  			`id` DESC
  		LIMIT 1
  	</select>
+ 	
+ 	<select id="selectOrderListByUserId" resultType="com.luthita.order.model.Order">
+ 		SELECT
+ 			`id` ,
+ 			`storeId`,
+ 			`userId`,
+ 			`payMethod`,
+ 			`payment`,
+ 			`status`,
+ 			`orderedAt`
+ 		FROM
+ 			`order`
+ 		WHERE
+ 			`userId` =#{userId}
+ 	</select>
  </mapper>

@@ -70,7 +70,7 @@
         </button>
       </div>
       <div class="modal-body">
-      	<h5 class="text-center">주문번호 ${orderId }</h5>
+      	<h5 class="text-center orderId">주문번호 ${orderId }</h5>
         <p class="text-center">결제가 완료되었습니다.</p>
       </div>
       <div class="modal-footer">
@@ -119,6 +119,7 @@
 				data: JSON.stringify(param),
 				success:function(data){
 					if(data.result == 'success'){
+						$('.orderId').html("주문번호 " + data.orderId);
 	    				$('.modal').modal();
 	    			}
 	    		}, error: function(e){

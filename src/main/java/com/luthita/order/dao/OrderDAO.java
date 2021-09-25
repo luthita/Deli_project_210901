@@ -1,7 +1,11 @@
 package com.luthita.order.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.luthita.order.model.Order;
 
 @Repository
 public interface OrderDAO {
@@ -13,4 +17,6 @@ public interface OrderDAO {
 			@Param("payment") int payment);
 	
 	public int selectLastOrderId(int userId);
+	
+	public List<Order> selectOrderListByUserId(int userId);
 }
