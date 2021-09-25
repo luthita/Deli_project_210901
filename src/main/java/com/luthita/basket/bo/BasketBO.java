@@ -33,4 +33,8 @@ public class BasketBO {
 	public Integer getLastMenuId(int userId) {
 		return basketDAO.selectLastMenuId(userId);
 	}
+	
+	public void deleteAllBasketByUserId(int userId) {
+		basketDAO.deleteAllBasketByUserId(userId);
+	}
 }

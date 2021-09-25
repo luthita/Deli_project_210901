@@ -55,4 +55,11 @@
  		ORDER BY `id` DESC
  		LIMIT 1
  	</select>
+ 	<delete id="deleteAllBasketByUserId" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`basket`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</delete>
  </mapper>

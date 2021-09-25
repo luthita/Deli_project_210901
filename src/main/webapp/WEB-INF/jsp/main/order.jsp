@@ -70,7 +70,7 @@
         </button>
       </div>
       <div class="modal-body">
-      	<h5 class="text-center">주문번호 100</h5>
+      	<h5 class="text-center">주문번호 ${orderId }</h5>
         <p class="text-center">결제가 완료되었습니다.</p>
       </div>
       <div class="modal-footer">
@@ -97,10 +97,12 @@
 			// alert(storeId + " " + payMethod + " " + payment);
 			
 			
+			
+			let param = [{'storeId': storeId, 'payMethod':payMethod, 'payment':payment}];
+			
 			// 반복문을 통해 menuId, count 가져오기
-			var arrMenu= new Array();
 			<c:forEach items="${basketList}" var="basket">
-				arrMenu.push({
+				param.push({
 					menuId:"${basket.menuId}",
 					count:"${basket.count}"
 				});
@@ -113,10 +115,8 @@
 			$.ajax({
 				url: '/main/order',
 				type: 'POST',
-				data: {"storeId":storeId,
-						"payMethod":payMethod,
-						"payment":payment,
-						"arrMenu":arrMenu},
+				contentType: 'application/json',
+				data: JSON.stringify(param),
 				success:function(data){
 					if(data.result == 'success'){
 	    				$('.modal').modal();
@@ -126,6 +126,29 @@
 	    		}
 			});
 			
+			
+			/*
+				$.ajax({
+					type:'POST'
+					, contentType: 'application/json'
+					, data: JSON.stringify(param)
+					, url : '/main'
+					, success: function(data){
+						alert(data)
+					}, error: function(e){
+						alert("error: " + e);
+					}
+				});
+			
+			
+			@ResponseBody
+			@PostMapping("/main")
+			public List<Map<String, Object>> ajax(
+					@RequestBody List<Map<String, Object>> param){
+				
+				return param;
+			}
+			*/
 		});
 	});
 </script>

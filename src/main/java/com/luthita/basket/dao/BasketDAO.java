@@ -22,4 +22,6 @@ public interface BasketDAO {
 	public void deleteBasket(int id);
 	
 	public Integer selectLastMenuId(int userId);
+	
+	public void deleteAllBasketByUserId(int userId);
 }
