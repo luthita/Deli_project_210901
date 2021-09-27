@@ -21,6 +21,7 @@ import com.luthita.basket.bo.BasketBO;
 import com.luthita.menu.bo.MenuBO;
 import com.luthita.order.bo.OrderBO;
 import com.luthita.orderedMenu.bo.OrderedMenuBO;
+import com.luthita.store.bo.LikeBO;
 
 @RestController
 @RequestMapping("/main")
@@ -39,6 +40,9 @@ public class MainRestController {
 	
 	@Autowired
 	private OrderedMenuBO orderedMenuBO;
+	
+	@Autowired
+	private LikeBO likeBO;
 	
 	// Insert Basket(장바구니에 담기)
 	@RequestMapping("/add_basket")
@@ -170,5 +174,24 @@ public class MainRestController {
 		
 		return result;
 		
+	}
+	
+	@RequestMapping("/like")
+	public Map<String, Object> like(
+			@RequestParam("storeId") int storeId,
+			HttpServletRequest request){
+		
+		Map<String, Object> result = new HashMap<>();
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		if(userId == null) {
+			result.put("result", "error");
+			logger.error("[좋아요] 로그인 세션이 없습니다.");
+			return result;
+		}
+		
+		likeBO.like(storeId, userId);
+		result.put("result", "success");
+		return result;
 	}
 }

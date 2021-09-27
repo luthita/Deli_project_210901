@@ -5,14 +5,27 @@
 <div class="d-flex justify-content-center align-items-center">
 	<div class="menuTable">
 		<div class="d-flex m-3 align-items-center">
-			<h1 class="textO1 font-weight-bold fontJua mr-5">${store.storeName}</h1>
-			<span class="mx-4">♡ 찜 (개수)</span>
+			<h1 class="textO1 font-weight-bold fontJua mr-5">${storeContent.store.storeName}</h1>
+			<%-- 좋아요 --%>
+			<div class="like m-3">
+				<a href="#" class="like-btn"data-store-id="${storeContent.store.id}" data-user-id="${userId}">
+					<%-- 좋아요 해제 상태 --%>
+					<c:if test="${storeContent.filledLike eq false}">
+						<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="20px" height="20px">
+					</c:if>
+					<%-- 좋아요 상태 --%>
+					<c:if test="${storeContent.filledLike eq true}">
+						<img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="20px" height="20px">
+					</c:if>
+				</a>
+				<a href="#" class="likeComment"><span class="text-danger font-weight-bold">찜</span> ${storeContent.likeCount}개</a>
+			</div>
 			<span class="mx-4">★ 리뷰 수</span>
 		</div>
 		<hr>
 		<div class="my-2">
 			<h3>가게소개</h3>
-			<span>${store.introduce }</span>
+			<span>${storeContent.store.introduce }</span>
 		</div>
 		<hr>
 		<table class="table text-center table-hover" id="menuTable">
@@ -24,7 +37,7 @@
 	            </tr>
 	        </thead>
 	        <tbody>
-	        	<c:forEach var="menu" items="${menuList}">
+	        	<c:forEach var="menu" items="${storeContent.menuList}">
 	            <tr data-menu-id="${menu.id}" data-menu-image="${menu.imagePath}" data-menu-name="${menu.name }" data-menu-price="${menu.price }"data-toggle="modal" data-target="#menuModal">
 	            	<c:choose>
 		            	<c:when test="${menu.imagePath eq null}">
@@ -117,7 +130,7 @@ $(document).ready(function(){
 			$('.totalPrice').html("총 금액 : " + price * count + "원");
 		});
 		
-		
+		// 메뉴
 		$('#menuSubmit').click(function(){
 			var count = $('#count').val();
 			
@@ -145,5 +158,33 @@ $(document).ready(function(){
 		});
 	});
 	
+	// 좋아요 버튼 클릭
+	$('.like-btn').on('click', function(e){
+		e.preventDefault(e);
+		
+		var storeId = $(this).data("store-id");
+		var userId = $(this).data("user-id");
+		
+		if(userId == ''){
+			alert("로그인 후에 이용 가능합니다.");
+			return;
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: '/main/like',
+			data: {"storeId":storeId},
+			success: function(data){
+				if(data.result == 'success'){
+					location.reload();
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				var errorMsg = jqXHR.responseJSON.status;
+				alert(errorMsg + ":" + textStatus);
+			}
+		});
+
+	});
 });
 </script>

@@ -47,7 +47,7 @@
 					</div>
 				</div>
 				
-				<%-- 데이터 받아온 변수들... html에서 변수 선언을 할줄 몰라 일단 이렇게 함 --%>
+				<%-- 데이터 받아온 변수들... --%>
 				<div class="fade">
 					<fmt:formatDate value="${orderedMenuView.order.orderedAt}" var="orderedAt" pattern="yyyy년 MM월 dd일 HH시 ss분"/>
 					<span id="orderedAt"data-orderedat="${orderedAt}">${orderedAt}</span>
@@ -62,60 +62,26 @@
 	</div>
 </div>
 
-<div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="menuModalLabel">주문 상세</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form class="menuForm">
-      <div class="modal-body">
-         <div class="form-group">
-         	<h4 id="modalStoreName"></h4>
-         </div>
-         <span id="modalOrderedAt" class="textGray2"></span><br>
-         <span id="modalOrderId" class="textGray2"></span>
-
-		<div class="d-flex justify-content-between mt-3">
-			<strong>총 주문금액</strong>
-			<strong id="modalTotalPrice"></strong>
-		</div>
-		<div class="d-flex justify-content-between">
-			<strong>배달비</strong>
-			<strong id="modalDeliveryFee"></strong>
-		</div>
-		<hr class="my-2">
-		<div class="d-flex justify-content-between">
-			<strong>총 결제금액</strong>
-			<strong id="modalPayment"></strong>
-		</div>
-		<div class="d-flex justify-content-between">
-			<strong>결제방법</strong>
-			<strong id="modalPayMethod"></strong>
-		</div>
-         <hr>
-         <div>
-         	<span>배달주소</span><br>
-         	<span class="textGray2" id="modalAddress"></span>
-         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn bgGray" data-dismiss="modal">닫기</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 <script>
 	$(document).ready(function(){
 		$('.orderDetail').click(function(){
 			
 			var orderedMenuView = $(this).data('orderedmenuview');
 			
-			var orderId = $('#orderId').html();
+			$('#orderDetailModal').data('orderedmenuview',orderedMenuView);
+
+			$.ajax({
+				type: 'POST',
+				url: '/main/order_detail_modal_view',
+				data:{
+					orderedMenuView
+				},
+				success:function(data){
+					location.href="order_detail_modal_view"
+				}
+			});
+			/*
+			 var orderId = $('#orderId').html();
 			var storeName = $('#storeName').html();
 			var orderedAt = $('#orderedAt').html();
 			var storeId = $('#storeId').html();
@@ -124,7 +90,7 @@
 			var address = $('#address').html();
 			var deliveryfee = $('#deliveryfee').html();
 			var totalPrice = payment - deliveryfee;
-
+			
 			if(payMethod == 'meetCard'){
 				payMethod = '만나서 카드 결제';
 			} else if(payMethod == 'meetCash'){
@@ -143,6 +109,7 @@
 			$('#modalPayment').html(payment + "원");
 			$('#modalPayMethod').html(payMethod);
 			$('#modalAddress').html(address);
+			*/
 		});
 	});
 </script>

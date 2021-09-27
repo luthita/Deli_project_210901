@@ -1,5 +1,6 @@
 package com.luthita.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.luthita.basket.bo.BasketBO;
 import com.luthita.basket.model.Basket;
 import com.luthita.menu.bo.MenuBO;
-import com.luthita.menu.model.Menu;
-import com.luthita.order.bo.OrderBO;
-import com.luthita.orderedMenu.bo.OrderedMenuBO;
 import com.luthita.orderedMenu.bo.OrderedMenuViewBO;
 import com.luthita.orderedMenu.model.OrderedMenuView;
+import com.luthita.store.bo.LikeBO;
 import com.luthita.store.bo.StoreBO;
+import com.luthita.store.bo.StoreContentBO;
 import com.luthita.store.model.Store;
+import com.luthita.store.model.StoreContent;
 import com.luthita.user.bo.UserBO;
 import com.luthita.user.model.User;
 
@@ -41,7 +42,13 @@ public class MainController {
 	private BasketBO basketBO;
 	
 	@Autowired
+	private LikeBO likeBO;
+	
+	@Autowired
 	private OrderedMenuViewBO orderedMenuViewBO;
+	
+	@Autowired
+	private StoreContentBO storeContentBO;
 	
 	@RequestMapping("/main_view")
 	public String signInView(Model model) {
@@ -69,15 +76,14 @@ public class MainController {
 			HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
 		session.removeAttribute("sessionStoreId");
 		
-		List<Menu> menuList = menuBO.getMenuList(storeId);
-		Store store = storeBO.getStore(storeId);
+		StoreContent storeContent = storeContentBO.getStoreContent(storeId, userId);
 		
-		session.setAttribute("sessionStoreId", store.getId());
-		
-		model.addAttribute("store",store);
-		model.addAttribute("menuList", menuList);
+		session.setAttribute("sessionStoreId", storeId);
+		model.addAttribute("userId",userId);
+		model.addAttribute("storeContent",storeContent);
 		model.addAttribute("viewName","main/store");
 		return "template/layout";
 	}
@@ -129,5 +135,37 @@ public class MainController {
 		model.addAttribute("viewName","main/orderedList");
 		model.addAttribute("orderedMenuViewList", orderedMenuViewList);
 		return "template/layout";
+	}
+	
+	@RequestMapping("/like_list_view")
+	public String likeListView(
+			Model model,
+			HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		List<Integer> storeIdList = likeBO.getStoreIdList(userId);
+		List<Store> storeList = new ArrayList<>();
+		for(int storeId : storeIdList) {
+			Store store = storeBO.getStore(storeId);
+			storeList.add(store);
+		}
+		
+		model.addAttribute("storeList", storeList);
+		model.addAttribute("viewName","main/like_list");
+		return "template/layout";
+		
+	}
+	
+	@RequestMapping("/order_detail_modal_view")
+	public String orderDetailView(
+			Model model,
+			OrderedMenuView orderedMenuView) {
+	
+		model.addAttribute("orderedMenuView", orderedMenuView);
+		model.addAttribute("viewName","main/orderDetailModal");
+		return "template/layout";
+		
 	}
 }

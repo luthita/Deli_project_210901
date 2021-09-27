@@ -46,7 +46,7 @@
 				<div>
 					<div class="d-flex justify-content-end mr-5">
 						<div class="d-flex justify-content-end mr-2">
-							<a href="#" class="btn bgYellow text-dark w-100">찜 목록</a>
+							<a href="/main/like_list_view" class="btn bgYellow text-dark w-100">찜 목록</a>
 						</div>
 						<div class="d-flex justify-content-end">
 							<a href="/main/orderedList_view" class="btn bgYellow text-dark w-100">주문내역</a>

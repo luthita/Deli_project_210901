@@ -6,7 +6,6 @@ header{height:100px; background:#2C558E;}
 header .logo{width:300px;}
 header .login-info{width:900px;}
 footer{height: 100px;}
-
 .sign-up-box {width:500px; background-color:#F2F2F2;}
 .sign-up-subject {margin:20px; font-weight:bold;}
 
@@ -161,7 +160,9 @@ footer{height: 100px;}
 	height: auto; 
 }
 
-
+.likeComment{
+	font-size:18px;
+}
 .menuTable{
 	width:800px;
 }
@@ -171,8 +172,12 @@ footer{height: 100px;}
 .imageScale:hover{
   transform: scale(2.4);
 }
+a{
+	color: #000;
+}
 a:hover{
-	color:#F2F2F2
+	text-decoration:none;
+	color:#777;
 }
 .categoryBox {
     width: 100px;
