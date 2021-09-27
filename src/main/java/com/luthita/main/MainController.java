@@ -17,6 +17,8 @@ import com.luthita.basket.model.Basket;
 import com.luthita.menu.bo.MenuBO;
 import com.luthita.orderedMenu.bo.OrderedMenuViewBO;
 import com.luthita.orderedMenu.model.OrderedMenuView;
+import com.luthita.review.bo.ReviewBO;
+import com.luthita.review.model.Review;
 import com.luthita.store.bo.LikeBO;
 import com.luthita.store.bo.StoreBO;
 import com.luthita.store.bo.StoreContentBO;
@@ -49,6 +51,9 @@ public class MainController {
 	
 	@Autowired
 	private StoreContentBO storeContentBO;
+	
+	@Autowired
+	private ReviewBO reviewBO;
 	
 	@RequestMapping("/main_view")
 	public String signInView(Model model) {
@@ -158,14 +163,24 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping("/order_detail_modal_view")
-	public String orderDetailView(
+	@RequestMapping("/review_view")
+	public String reviewListView(
 			Model model,
-			OrderedMenuView orderedMenuView) {
-	
-		model.addAttribute("orderedMenuView", orderedMenuView);
-		model.addAttribute("viewName","main/orderDetailModal");
-		return "template/layout";
+			HttpServletRequest request,
+			@RequestParam("storeId") int storeId,
+			@RequestParam(required=false, value="orderId") Integer orderId) {
 		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		List<Review> reviewList = reviewBO.getReviewListByStoreId(storeId);
+		Store store = storeBO.getStore(storeId);
+		
+		model.addAttribute("orderId",orderId);
+		model.addAttribute("userId",userId);
+		model.addAttribute("store",store);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("viewName","main/review");
+		return "template/layout";
 	}
+	
 }

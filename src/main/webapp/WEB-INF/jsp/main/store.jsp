@@ -56,10 +56,17 @@
 	</div>
 </div>
 
+<%-- 플로팅 버튼(리뷰) --%>
+<div class="floBtn2 hidden-md hidden-sm hidden-xs d-flex justify-content-center align-items-center">
+  <a href="/main/review_view" target="_blank">
+    <span><i class="fa fa-comment-dots fa-2x text-white" aria-hidden="true"></i></span>
+  </a>
+</div>
+
 <%-- 플로팅 버튼(주문) --%>
 <div class="floBtn1 hidden-md hidden-sm hidden-xs d-flex justify-content-center align-items-center">
   <a href="/main/basket_view" target="_blank">
-    <span><i class="fa fa-shopping-cart fa-3x text-white" aria-hidden="true"></i></span>
+    <span><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="true"></i></span>
   </a>
 </div>
 

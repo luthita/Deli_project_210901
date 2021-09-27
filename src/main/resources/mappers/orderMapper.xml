@@ -49,4 +49,18 @@
  		WHERE
  			`userId` =#{userId}
  	</select>
+ 	<select id="selectOrderById" resultType="com.luthita.order.model.Order">
+ 		SELECT
+ 			`id` ,
+ 			`storeId`,
+ 			`userId`,
+ 			`payMethod`,
+ 			`payment`,
+ 			`status`,
+ 			`orderedAt`
+ 		FROM
+ 			`order`
+ 		WHERE
+ 			`id` =#{id}
+ 	</select>
  </mapper>

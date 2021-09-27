@@ -66,4 +66,34 @@ public class OrderedMenuViewBO {
 		}
 		return orderedMenuViewList;
 	}
+	
+	public OrderedMenuView getOrderedMenuView(int orderId, int userId) {
+		OrderedMenuView orderedMenuView = new OrderedMenuView();
+		
+		Order order = orderBO.getOrder(orderId);
+		// 해당 주문의 주문 가져오기
+		orderedMenuView.setOrder(order);
+		
+		// 해당 주문의 가게 가져오기
+		int storeId = order.getStoreId();
+		Store store = storeBO.getStore(storeId);
+		orderedMenuView.setStore(store);
+		
+		// 해당 주문의 메뉴들 가져오기
+		List<Integer> orderedMenuId = orderedMenuBO.getMenuIdByOrderId(order.getId());
+		List<String> orderedMenuName = new ArrayList<>();
+		for(int menuId : orderedMenuId) {
+			String menuName = menuBO.getMenuNameById(menuId);
+			orderedMenuName.add(menuName);
+		}
+		orderedMenuView.setMenuName(orderedMenuName);
+		
+		// 해당 주문의 총 주문금액 가져오기
+		orderedMenuView.setPayment(order.getPayment());
+		
+		// 해당 주문 회원의 주소 가져오기
+		orderedMenuView.setAddress(userBO.getAddressById(userId));
+		
+		return orderedMenuView;
+	}
 }

@@ -21,13 +21,22 @@ import com.luthita.basket.bo.BasketBO;
 import com.luthita.menu.bo.MenuBO;
 import com.luthita.order.bo.OrderBO;
 import com.luthita.orderedMenu.bo.OrderedMenuBO;
+import com.luthita.orderedMenu.bo.OrderedMenuViewBO;
+import com.luthita.orderedMenu.model.OrderedMenuView;
+import com.luthita.review.bo.ReviewBO;
+import com.luthita.review.model.Review;
 import com.luthita.store.bo.LikeBO;
+import com.luthita.store.bo.StoreBO;
+import com.luthita.store.model.Store;
 
 @RestController
 @RequestMapping("/main")
 public class MainRestController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private StoreBO storeBO;
 	
 	@Autowired
 	private BasketBO basketBO;
@@ -43,6 +52,12 @@ public class MainRestController {
 	
 	@Autowired
 	private LikeBO likeBO;
+	
+	@Autowired
+	private OrderedMenuViewBO orderedMenuViewBO;
+	
+	@Autowired
+	private ReviewBO reviewBO;
 	
 	// Insert Basket(장바구니에 담기)
 	@RequestMapping("/add_basket")
@@ -191,6 +206,46 @@ public class MainRestController {
 		}
 		
 		likeBO.like(storeId, userId);
+		result.put("result", "success");
+		return result;
+	}
+	
+	@RequestMapping("/order_detail_modal")
+	public Map<String, Object> orderDetailModal(
+			@RequestParam("orderId") int orderId,
+			HttpServletRequest request){
+		
+		Map<String, Object> result = new HashMap<>();
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		if(userId == null) {
+			result.put("result", "error");
+			logger.error("[주문상세] 로그인 세션이 없습니다.");
+			return result;
+		}
+		
+		// orderId를 통해 orderedMenuView 가져오기
+		OrderedMenuView orderedMenuView = orderedMenuViewBO.getOrderedMenuView(orderId, userId);
+		result.put("result", "success");
+		result.put("Object", orderedMenuView);
+		return result;
+	}
+	
+	@RequestMapping("/review")
+	public Map<String, Object> review(
+			HttpServletRequest request,
+			@RequestParam("storeId") int storeId,
+			@RequestParam(required=false, value="orderId") Integer orderId){
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		Map<String, Object> result = new HashMap<>();
+		List<Review> reviewList = reviewBO.getReviewListByStoreId(storeId);
+		Store store = storeBO.getStore(storeId);
+		
+		
 		result.put("result", "success");
 		return result;
 	}

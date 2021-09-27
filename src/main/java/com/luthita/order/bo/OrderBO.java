@@ -25,4 +25,8 @@ public class OrderBO {
 	public List<Order> getOrderListByUserId(int userId){
 		return orderDAO.selectOrderListByUserId(userId);
 	}
+	
+	public Order getOrder(int id) {
+		return orderDAO.selectOrderById(id);
+	}
 }

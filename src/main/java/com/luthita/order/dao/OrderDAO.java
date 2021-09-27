@@ -19,4 +19,6 @@ public interface OrderDAO {
 	public int selectLastOrderId(int userId);
 	
 	public List<Order> selectOrderListByUserId(int userId);
+	
+	public Order selectOrderById(int id);
 }
