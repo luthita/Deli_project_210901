@@ -101,4 +101,16 @@
     	WHERE
     		`id` = #{id}
     </select>
+    <update id="updateStore" parameterType="map">
+    	UPDATE `store`
+    	SET
+    		`introduce` = #{introduce},
+    		`kinds` = #{kinds},
+    		`deliveryfee` = #{deliveryfee},
+    		`minimumPrice` = #{minimumPrice},
+    		`logoImagePath` = #{logoImagePath},
+    		`updatedAt` = NOW()
+    	WHERE
+    		`adminId` = #{adminId}
+    </update>
 </mapper>

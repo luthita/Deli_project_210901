@@ -8,7 +8,7 @@
 		<%-- 해당 계정에 가게 등록이 되어 있다면 가게관리 / 메뉴 관리 보이기 --%>
 		<c:if test="${existStore eq true}">
 			<div class="d-flex">
-				<a href="" class="btn btn-secondary w-50 my-3 mr-3 btn-lg ">가게 관리</a>
+				<a href="/admin/store_manage_view" class="btn btn-secondary w-50 my-3 mr-3 btn-lg ">가게 관리</a>
 				<a href="/admin/menu_view" class="btn btn-success w-50 my-3 ml-3 btn-lg">메뉴 관리</a>
 			</div>
 		</c:if>

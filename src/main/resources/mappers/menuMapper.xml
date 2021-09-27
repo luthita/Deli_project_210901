@@ -70,4 +70,13 @@
  		WHERE
  			`id` = #{id}
 	</select>
+	
+	<select id="selectMenuNameById" resultType="String">
+		SELECT
+			`name`
+		FROM
+			`menu`
+		WHERE
+			`id` = #{id}
+	</select>
  </mapper>

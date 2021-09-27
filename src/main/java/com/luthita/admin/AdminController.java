@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.luthita.menu.bo.MenuBO;
 import com.luthita.menu.model.Menu;
+import com.luthita.store.bo.StoreBO;
+import com.luthita.store.model.Store;
 
 @RequestMapping("/admin")
 @Controller
@@ -19,6 +21,9 @@ public class AdminController {
 
 	@Autowired
 	private MenuBO menuBO;
+	
+	@Autowired
+	private StoreBO storeBO;
 	
 	@RequestMapping("/sign_in_view")
 	public String signInView() {
@@ -55,6 +60,19 @@ public class AdminController {
 		model.addAttribute("menuList", menuList);
 				
 		return "template/layout";
+	}
+	@RequestMapping("store_manage_view")
+	public String storeManageView(
+			Model model,
+			HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		Integer storeId = (Integer) session.getAttribute("storeId");
+		Store store = storeBO.getStore(storeId);
+		
+		model.addAttribute("store", store);
+		return "admin/store_manage";
+		
 	}
 	
 	@RequestMapping("/sign_out")

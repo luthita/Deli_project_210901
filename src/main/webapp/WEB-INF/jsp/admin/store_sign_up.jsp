@@ -165,7 +165,7 @@ $(document).ready(function(){
 			success: function(data){
 				if(data.result == 'success'){
 					alert("가게 등록이 되셨습니다.");
-					location.href="/admin/sign_in_view";
+					location.href="/admin/sign_out";
 					alert("다시 로그인해주십시오")
 				}else{
 					alert("fail");

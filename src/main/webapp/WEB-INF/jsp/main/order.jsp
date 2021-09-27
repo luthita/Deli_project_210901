@@ -27,8 +27,7 @@
 				
 			</div>
 			<hr class="mt-2">
-			<div class="d-flex justify-content-between">
-				<span>최소결제 금액 : ${store.minimumPrice }원</span>
+			<div class="d-flex justify-content-end">
 				<span>총 <fmt:formatNumber value="${totalPrice}" />원</span>
 			</div>
 		</div>
@@ -47,15 +46,28 @@
 				</div>
 				<div>
 					<span>주문 금액 : <fmt:formatNumber value="${totalPrice}" />원</span><br>
-					<span>배달비 : ${store.deliveryFee }원</span><br>
+					<span>배달비 : <fmt:formatNumber value="${store.deliveryFee }" />원</span><br>
 					<hr>
-					<span class="payment" data-payment="${totalPrice + store.deliveryFee}">총 결제금액 : <fmt:formatNumber value="${totalPrice + store.deliveryFee}" />원</span>
+					<span class="payment" data-payment="${totalPrice + store.deliveryFee}">총 결제금액 : <fmt:formatNumber value="${totalPrice + store.deliveryFee}" />원</span><br>
+					<span>최소결제 금액 : <fmt:formatNumber value="${store.minimumPrice }" />원</span>
+					<c:if test="${totalPrice + store.deliveryFee < store.minimumPrice }">
+						<div class="d-flex justify-content-end mt-3">
+							<span class="text-danger font-weight-bold">주문 금액이 최소결제 금액보다 낮습니다.</span>
+						</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
-		<div class="d-flex justify-content-end">
-			<button id="orderBtn"class="btn btn-dark w-25 text-white p-3 m-3">결제하기</button>
-		</div>
+		<c:if test="${totalPrice + store.deliveryFee < store.minimumPrice }">
+			<div class="d-flex justify-content-end mt-3 mr-3 p-3">
+				<span class="text-danger font-weight-bold">결제 불가[최소 결제 금액]</span>
+			</div>
+		</c:if>
+		<c:if test="${totalPrice + store.deliveryFee >= store.minimumPrice }">
+			<div class="d-flex justify-content-end">
+				<button id="orderBtn"class="btn btn-dark w-25 text-white p-3 m-3">결제하기</button>
+			</div>
+		</c:if>
 	</div>
 	</div>
 </div>

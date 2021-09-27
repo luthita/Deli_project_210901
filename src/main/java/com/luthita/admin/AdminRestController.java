@@ -181,4 +181,34 @@ public class AdminRestController {
 		return result;
 		
 	}
+	@PostMapping("/store_update")
+	public Map<String, String> storeUpdate(
+			@RequestParam("introduce") String introduce,
+			@RequestParam("kinds") String kinds,
+			@RequestParam("deliveryfee") int deliveryfee,
+			@RequestParam("minimumPrice") int minimumPrice,
+			@RequestParam(value = "file", required = false) MultipartFile logoFile,
+			HttpServletRequest request){
+		
+		Map<String,String> result = new HashMap<>();
+		HttpSession session = request.getSession();
+		Integer adminId = (Integer) session.getAttribute("adminId");
+		
+		if(adminId == null) {
+			result.put("result","error");
+			logger.error("[가게등록] 로그인 세션이 없습니다.");
+			return result;
+		}
+		
+		int row = storeBO.updateStore(adminId, introduce, kinds,deliveryfee, minimumPrice, logoFile);
+		if(row > 0) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "error");
+			logger.error("[가게정보변경] 가게정보변경을 완료하지 못했습니다.");
+		}
+		
+		return result;
+	}
+	
 }

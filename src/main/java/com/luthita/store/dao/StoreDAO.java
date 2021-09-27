@@ -27,4 +27,12 @@ public interface StoreDAO {
 	public List<Store> selectStoreListByKinds(String kinds);
 	
 	public String selectStoreNameById(int id);
+	
+	public int updateStore(
+			@Param("adminId") int adminId,
+			@Param("introduce") String introduce, 
+			@Param("kinds") String kinds, 
+			@Param("deliveryfee") int deliveryFee,
+			@Param("minimumPrice") int minimumPrice,
+			@Param("logoImagePath") String logoImagePath);
 }

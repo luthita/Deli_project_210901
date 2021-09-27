@@ -33,7 +33,14 @@
         WHERE
         	`id` = #{id}
     </select>
-    
+    <select id="selectAddressById" resultType="String">
+    	SELECT
+    		`address`
+    	FROM
+    		`user`
+    	WHERE
+    		`id` = #{id}
+    </select>
     <insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 		(

@@ -22,4 +22,6 @@ public interface UserDAO {
 			@Param("password") String password);
 	
 	public User selectUserById(int id);
+	
+	public String selectAddressById(int id);
 }

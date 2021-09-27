@@ -52,5 +52,18 @@ public class StoreBO {
 	public String getStoreNameById(int id) {
 		return storeDAO.selectStoreNameById(id);
 	}
-	
+	public int updateStore(int adminId, String introduce,String kinds,int deliveryFee,int  minimumPrice,MultipartFile logoFile) {
+		
+		String logoImagePath = null;
+		if(logoFile != null) {
+			try {
+				logoImagePath = fileManagerService.saveFile(adminId, logoFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				logger.error("[파일업로드 에러] " + e.getMessage());
+			}
+		}
+		
+		return storeDAO.updateStore(adminId, introduce, kinds,deliveryFee, minimumPrice, logoImagePath);
+	}
 }

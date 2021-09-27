@@ -1,8 +1,6 @@
 package com.luthita.main;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,8 +16,9 @@ import com.luthita.basket.model.Basket;
 import com.luthita.menu.bo.MenuBO;
 import com.luthita.menu.model.Menu;
 import com.luthita.order.bo.OrderBO;
-import com.luthita.order.model.Order;
 import com.luthita.orderedMenu.bo.OrderedMenuBO;
+import com.luthita.orderedMenu.bo.OrderedMenuViewBO;
+import com.luthita.orderedMenu.model.OrderedMenuView;
 import com.luthita.store.bo.StoreBO;
 import com.luthita.store.model.Store;
 import com.luthita.user.bo.UserBO;
@@ -42,10 +41,7 @@ public class MainController {
 	private BasketBO basketBO;
 	
 	@Autowired
-	private OrderBO orderBO;
-	
-	@Autowired
-	private OrderedMenuBO orderedMenuBO;
+	private OrderedMenuViewBO orderedMenuViewBO;
 	
 	@RequestMapping("/main_view")
 	public String signInView(Model model) {
@@ -128,27 +124,10 @@ public class MainController {
 	
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
-		List<Order> orderList = orderBO.getOrderListByUserId(userId);
-		List<String> storeNameList = new ArrayList<>();
-		List<Map<String, Integer>> orderedMenuList = new ArrayList<>();
-		
-		for(Order order : orderList) {
-			int storeId = order.getStoreId();
-			int orderId = order.getId();
-			
-			// 해당 주문의 가게 이름들 가져오기
-			storeNameList.add(storeBO.getStoreNameById(storeId));
-			
-			// 해당 주문의 메뉴들 가져오기
-			orderedMenuList.add(orderedMenuBO.getMenuIdAndCountByOrderId(orderId));
-
-
-		}
+		List<OrderedMenuView> orderedMenuViewList= orderedMenuViewBO.generateOrderedMenuList(userId);
 		
 		model.addAttribute("viewName","main/orderedList");
-		model.addAttribute("orderList", orderList);
-		model.addAttribute("storeList", storeNameList);
-		model.addAttribute("orderedMenuList",orderedMenuList);
+		model.addAttribute("orderedMenuViewList", orderedMenuViewList);
 		return "template/layout";
 	}
 }

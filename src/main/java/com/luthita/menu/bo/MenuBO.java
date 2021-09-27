@@ -74,4 +74,8 @@ public class MenuBO {
 			return false;
 		}
 	}
+	
+	public String getMenuNameById(int id) {
+		return menuDAO.selectMenuNameById(id);
+	}
 }

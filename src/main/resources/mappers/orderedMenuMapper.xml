@@ -19,10 +19,9 @@
 			, NOW()
 		)
 	</insert>
-	<select id="selectMenuIdAndCountByOrderId" resultType="map">
+	<select id="selectMenuIdByOrderId" resultType="int">
 		SELECT
-			`menuId`,
-			`count`
+			`menuId`
 		FROM
 			`orderedMenu`
 		WHERE

@@ -15,4 +15,6 @@ public interface OrderedMenuDAO {
 			@Param("count") int count);
 	
 	public Map<String, Integer> selectMenuIdAndCountByOrderId(int orderId);
+	
+	public List<Integer> selectMenuIdByOrderId(int orderId);
 }

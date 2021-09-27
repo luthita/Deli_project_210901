@@ -24,4 +24,6 @@ public interface MenuDAO {
 	public Menu selectMenu(int id);
 	
 	public int selectStoreIdByMenuId(int id);
+	
+	public String selectMenuNameById(int id);
 }
