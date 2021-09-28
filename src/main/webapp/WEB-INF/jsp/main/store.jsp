@@ -20,7 +20,10 @@
 				</a>
 				<a href="#" class="likeComment"><span class="text-danger font-weight-bold">찜</span> ${storeContent.likeCount}개</a>
 			</div>
-			<span class="mx-4">★ 리뷰 수</span>
+			<div class="mx-4">
+				<img  src="https://www.iconninja.com/files/851/501/305/star-icon.png" width="20px" height="20px">
+				<span class="likeComment">리뷰 ${storeContent.reviewCount }개</span>
+			</div>
 		</div>
 		<hr>
 		<div class="my-2">
@@ -58,7 +61,7 @@
 
 <%-- 플로팅 버튼(리뷰) --%>
 <div class="floBtn2 hidden-md hidden-sm hidden-xs d-flex justify-content-center align-items-center">
-  <a href="/main/review_view" target="_blank">
+  <a href="/main/review_view?storeId=${storeContent.store.id }" target="_blank">
     <span><i class="fa fa-comment-dots fa-2x text-white" aria-hidden="true"></i></span>
   </a>
 </div>

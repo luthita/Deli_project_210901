@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.luthita.common.FileManagerService;
+import com.luthita.review.dao.ReviewDAO;
 import com.luthita.store.dao.StoreDAO;
 import com.luthita.store.model.Store;
 
@@ -19,6 +20,9 @@ public class StoreBO {
 	
 	@Autowired
 	private StoreDAO storeDAO;
+	
+	@Autowired
+	private ReviewDAO reviewDAO;
 	
 	@Autowired
 	private FileManagerService fileManagerService;
@@ -66,4 +70,16 @@ public class StoreBO {
 		
 		return storeDAO.updateStore(adminId, introduce, kinds,deliveryFee, minimumPrice, logoImagePath);
 	}
+	
+	public void updateStorePoint(int storeId) {
+		List<Integer> pointList = reviewDAO.getPointListById(storeId);
+		int sumPoint = 0;
+		for(int reviewPoint : pointList) {
+			sumPoint += reviewPoint;
+		}
+		double avgPoint = sumPoint / (double)pointList.size();
+		
+		storeDAO.updatePoint(avgPoint, storeId);
+	}
+	
 }

@@ -173,8 +173,17 @@ public class MainController {
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 		List<Review> reviewList = reviewBO.getReviewListByStoreId(storeId);
-		Store store = storeBO.getStore(storeId);
 		
+		Boolean isExistReview = null;
+		// 만약 orderId가 존재한다면 이미 리뷰를 쓴 주문은 아닐까?(한번 주문하고 여러번 리뷰를 쓰는 것을 방지)
+		if(orderId != null) {
+			isExistReview = reviewBO.isExistReview(orderId, userId);
+		} else {
+			isExistReview = false;
+		}
+
+		Store store = storeBO.getStore(storeId);
+		model.addAttribute("isExistReview", isExistReview);
 		model.addAttribute("orderId",orderId);
 		model.addAttribute("userId",userId);
 		model.addAttribute("store",store);

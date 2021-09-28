@@ -41,7 +41,7 @@
 					<div class="my-3 d-flex justify-content-center">
 						<div class="btn-group" role="group" aria-label="Basic example">
 							<a href="/main/store_view?storeId=${orderedMenuView.store.id }" class="btn btn-outline-dark px-5 py-2">가게 가기</a>
-							<a href="#" class="btn btn-outline-dark px-5 py-2 writeReviewBtn"data-orderid="${orderedMenuView.order.id}"data-storeid="${orderedMenuView.order.storeId}">리뷰 쓰기</a>
+							<a href="/main/review_view?orderId=${orderedMenuView.order.id}&storeId=${orderedMenuView.order.storeId}" class="btn btn-outline-dark px-5 py-2 writeReviewBtn">리뷰 쓰기</a>
 							<a href="#" class="btn btn-outline-dark px-5 py-2 orderDetail" data-orderid="${orderedMenuView.order.id}" data-toggle="modal" data-target="#orderDetailModal">주문 상세</a>
 						</div>
 					</div>
@@ -159,24 +159,6 @@
 					
 			});
 		});
-		$('.writeReviewBtn').click(function(){
-			
-			var orderId = $(this).data('orderid');
-			var storeId = ${this).data('storeid');
-			
-			$.ajax({
-				type: 'POST',
-				url: '/main/review_view',
-				data:{"orderId":orderId,
-						"storeId":storeId},
-				success:function(data){
-					location.href="/main/review_view";
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					var errorMsg = jqXHR.responseJSON.status;
-					alert(errorMsg + ":" + textStatus);
-				}
-			});
-		});
+		
 	});
 </script>

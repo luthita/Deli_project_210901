@@ -20,14 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.luthita.basket.bo.BasketBO;
 import com.luthita.menu.bo.MenuBO;
 import com.luthita.order.bo.OrderBO;
+import com.luthita.order.model.Order;
 import com.luthita.orderedMenu.bo.OrderedMenuBO;
 import com.luthita.orderedMenu.bo.OrderedMenuViewBO;
 import com.luthita.orderedMenu.model.OrderedMenuView;
 import com.luthita.review.bo.ReviewBO;
-import com.luthita.review.model.Review;
 import com.luthita.store.bo.LikeBO;
 import com.luthita.store.bo.StoreBO;
-import com.luthita.store.model.Store;
 
 @RestController
 @RequestMapping("/main")
@@ -232,20 +231,49 @@ public class MainRestController {
 		return result;
 	}
 	
-	@RequestMapping("/review")
-	public Map<String, Object> review(
+	@RequestMapping("/write_review")
+	public Map<String, Object> writeReview(
 			HttpServletRequest request,
-			@RequestParam("storeId") int storeId,
-			@RequestParam(required=false, value="orderId") Integer orderId){
+			@RequestParam("orderId") int orderId,
+			@RequestParam("point")int point,
+			@RequestParam("reviewText") String reviewText){
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
-		
+		String userName = (String) session.getAttribute("userName"); 		
 		Map<String, Object> result = new HashMap<>();
-		List<Review> reviewList = reviewBO.getReviewListByStoreId(storeId);
-		Store store = storeBO.getStore(storeId);
+		Order order = orderBO.getOrder(orderId);
+		int storeId = order.getStoreId();
 		
+		int row = reviewBO.addReview(storeId, userId, orderId, userName, point, reviewText);
+		if(row > 0) {
+			// 가게 평점 조정
+			storeBO.updateStorePoint(storeId);
+			result.put("result", "success");
+		} else {
+			logger.error("[리뷰쓰기] 리뷰 쓰기를 하지 못했습니다.");
+			result.put("result", "fail");
+		}
 		
+		return result;
+	}
+	
+	@RequestMapping("/delete_review")
+	public Map<String, Object> deleteReview(
+			@RequestParam("id") int id,
+			HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		Map<String, Object> result = new HashMap<>();
+		
+		if( userId == null) {
+			result.put("result", "error");
+			logger.error("[장바구니 삭제] 로그인 세션이 없습니다.");
+			return result;
+		}
+		
+		reviewBO.deleteReview(id);
 		result.put("result", "success");
 		return result;
 	}

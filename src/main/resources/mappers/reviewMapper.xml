@@ -8,6 +8,7 @@
  			`id`, 
 			`storeId`,
 			`userId`,
+			`orderId`,
 			`userName`,
 			`point`,
 			`review`,
@@ -17,5 +18,64 @@
 			`review`
 		WHERE
 			`storeId` = #{storeId}
+ 	</select>
+ 	
+ 	<insert id="insertReview" parameterType="map">
+ 		INSERT INTO `review`
+		(
+			`storeId`,
+			`userId`,
+			`orderId`,
+			`userName`,
+			`point`,
+			`review`,
+			`createdAt`,
+			`updatedAt`
+		)
+		VALUES
+		(
+			#{storeId}
+			, #{userId}
+			, #{orderId}
+			, #{userName}
+			, #{point}
+			, #{reviewText}
+			, NOW()
+			, NOW()
+		)
+ 	</insert>
+ 	
+ 	<select id="selectOrderIdList" resultType="int">
+ 		SELECT
+ 			`orderId`
+ 		FROM
+ 			`review`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</select>
+ 	
+ 	<select id="selectReviewCountByStoreId" resultType="int">
+ 		SELECT
+ 			count(1)
+ 		FROM
+ 			`review`
+ 		WHERE
+ 			`storeId` = #{storeId}
+ 	</select>
+ 	
+ 	<delete id="deleteReview" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`review`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ 	<select id="getPointListById" resultType="int">
+ 		SELECT
+ 			`point`
+ 		FROM
+ 			`review`
+ 		WHERE
+ 			`storeId` = #{storeId}
  	</select>
  </mapper>

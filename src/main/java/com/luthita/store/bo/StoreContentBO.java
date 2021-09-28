@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.luthita.menu.bo.MenuBO;
+import com.luthita.review.bo.ReviewBO;
 import com.luthita.store.model.StoreContent;
 
 @Service
@@ -18,6 +19,9 @@ public class StoreContentBO {
 	@Autowired
 	private MenuBO menuBO;
 	
+	@Autowired
+	private ReviewBO reviewBO;
+	
 	public StoreContent getStoreContent(Integer storeId, Integer userId) {
 		StoreContent storeContent = new StoreContent();
 		
@@ -29,6 +33,9 @@ public class StoreContentBO {
 		
 		// store의 좋아요 수
 		storeContent.setLikeCount(likeBO.getLikeCountByStoreId(storeId));
+		
+		// store의 리뷰 수
+		storeContent.setReviewCount(reviewBO.getReviewCountByStoreId(storeId));
 		
 		// store 메뉴 가져오기
 		storeContent.setMenuList(menuBO.getMenuList(storeId));

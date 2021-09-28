@@ -10,6 +10,14 @@ public class StoreContent {
 	private List<Menu> menuList;
 	private boolean filledLike;
 	private int likeCount;
+	private int reviewCount;
+	
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
 	public Store getStore() {
 		return store;
 	}

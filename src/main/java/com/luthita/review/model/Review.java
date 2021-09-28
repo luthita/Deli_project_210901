@@ -7,11 +7,20 @@ public class Review {
 	private int id; 
 	private int storeId;
 	private int userId;
+	private int orderId;
 	private String userName;
 	private double point;
 	private String review;
 	private Date createdAt;
 	private Date updatedAt;
+	
+	
+	public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 	public int getId() {
 		return id;
 	}

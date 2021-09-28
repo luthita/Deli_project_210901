@@ -13,8 +13,17 @@ public class Store {
 	private String logoImagePath; 
 	private int deliveryFee;
 	private int minimumPrice;
+	private double point;
 	private Date createdAt; 
 	private Date updatedAt;
+	
+	
+	public double getPoint() {
+		return point;
+	}
+	public void setPoint(double point) {
+		this.point = point;
+	}
 	public int getId() {
 		return id;
 	}

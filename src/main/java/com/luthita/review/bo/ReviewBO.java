@@ -17,4 +17,27 @@ public class ReviewBO {
 	public List<Review> getReviewListByStoreId(int storeId){
 		return reviewDAO.selectReviewListByStoreId(storeId);
 	}
+	
+	public int addReview(int storeId, int userId, int orderId, String userName, int point, String reviewText) {
+		return reviewDAO.insertReview(storeId, userId, orderId, userName, point, reviewText);
+	}
+	
+	public boolean isExistReview(int orderId, int userId) {
+		List<Integer> orderIdList = reviewDAO.selectOrderIdList(userId);
+		for(int reviewOrderId : orderIdList) {
+			if(reviewOrderId == orderId) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	public int getReviewCountByStoreId(int storeId) {
+		return reviewDAO.selectReviewCountByStoreId(storeId);
+	}
+	
+	public void deleteReview(int id) {
+		reviewDAO.deleteReview(id);
+	}
 }

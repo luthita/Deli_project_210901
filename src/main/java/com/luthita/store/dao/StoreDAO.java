@@ -35,4 +35,8 @@ public interface StoreDAO {
 			@Param("deliveryfee") int deliveryFee,
 			@Param("minimumPrice") int minimumPrice,
 			@Param("logoImagePath") String logoImagePath);
+	
+	public void updatePoint(
+			@Param("avgPoint")double avgPoint,
+			@Param("storeId") int storeId);
 }
