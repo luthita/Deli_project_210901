@@ -127,7 +127,7 @@
 							payMethod = '만나서 현금 결제';
 						} else if(payMethod == 'kakaoPay'){
 							payMethod = '카카오페이'
-						} else if(payMehotd == 'creditCard'){
+						} else if(payMethod == 'creditCard'){
 							payMethod = '신용/체크카드'
 						}
 						

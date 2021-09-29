@@ -179,10 +179,17 @@ a:hover{
 	text-decoration:none;
 	color:#777;
 }
+nav {height:40px; background-color:#F29F05;}
+.nav-link{
+	border-right: 4px solid #fff;
+}
+.nav-item .nav-link:hover {background-color:#A76417;}
+
 .categoryBox {
     width: 100px;
     height: 100px; 
     border-radius: 70%;
+    border: 2px solid #D93D04;
 }
 .category {
     width: 100%;

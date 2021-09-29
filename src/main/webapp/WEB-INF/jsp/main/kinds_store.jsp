@@ -48,12 +48,19 @@
 		</c:forEach>
 	</div>
 </div>
+<%-- 플로팅 버튼(Top) --%>
+<div class="floBtn2 hidden-md hidden-sm hidden-xs d-flex justify-content-center align-items-center">
+  <a href="#site-header" id="tothetop">
+    <span><i class="fa fa-arrow-up fa-2x text-white" aria-hidden="true"></i></span>
+  </a>
+</div>
 <%-- 플로팅 버튼(주문) --%>
 <div class="floBtn1 hidden-md hidden-sm hidden-xs d-flex justify-content-center align-items-center">
   <a href="/main/basket_view" target="_blank">
     <span><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="true"></i></span>
   </a>
 </div>
+
 <script>
 	$(document).ready(function(){
 		
@@ -61,8 +68,14 @@
 			e.preventDefault();
 			
 			var storeId = $(this).data('store-id');
-
-			
 		});
+		
+		
+		$( '#tothetop' ).click( function() {
+		    var htmloffset = $( 'html' ).offset();
+		    $( 'html, body' ).animate( { scrollTop : htmloffset.top }, 400 );
+		});
+
+
 	});
 </script>

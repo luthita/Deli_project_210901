@@ -3,10 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-
+<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
 <div class="d-flex">
-
-	<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
 	<c:choose>
 		<%-- url에 admin 이 포함되어 있으면 사장님 광장 gnb 로 출력 --%>
 		<c:when test="${fn:contains(path, 'admin')}">

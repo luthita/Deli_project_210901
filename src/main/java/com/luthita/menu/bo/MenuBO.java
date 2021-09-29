@@ -78,4 +78,8 @@ public class MenuBO {
 	public String getMenuNameById(int id) {
 		return menuDAO.selectMenuNameById(id);
 	}
+	
+	public int getStoreIdById(int id) {
+		return menuDAO.selectStoreIdByMenuId(id);
+	}
 }

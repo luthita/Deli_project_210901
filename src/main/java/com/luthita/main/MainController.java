@@ -116,10 +116,16 @@ public class MainController {
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
-		Integer storeId = (Integer) session.getAttribute("sessionStoreId");
 		User user = userBO.getUserById(userId);
-		Store store = storeBO.getStore(storeId);
 		List<Basket> basketList = basketBO.getBasketListByUserId(userId);
+		
+		// 어차피 장바구니의 메뉴들은 모두 같은 가게의 메뉴이다.
+		int menuId = basketList.get(0).getMenuId();
+		int storeId = menuBO.getStoreIdById(menuId);
+		
+		// 장바구니의 가게 객체 생성
+		Store store = storeBO.getStore(storeId);
+		
 		model.addAttribute("viewName","main/order");
 		model.addAttribute("user",user);
 		model.addAttribute("store",store);

@@ -25,7 +25,7 @@
 				</div>
 				<div class="p-2 ml-4 m-2">
 					<strong>${store.storeName }</strong><br>
-					<span class="textO1">★</span><span>(평점점수)</span><br>
+					<span class="starText text-center">★</span><span class="text-center">     ( ${store.point} )</span><br>
 					<span>최소 주문 : ${store.minimumPrice}원</span><br>
 					<span>배달팁 ${store.deliveryFee }원</span>
 				</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +27,23 @@
 		<header class="bgO2">
 			<jsp:include page="../include/gnb.jsp" />
 		</header>
+		<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
+		<c:choose>
+			<c:when test="${fn:contains(path, 'admin') || fn:contains(path, 'main/main_view')}">
+			</c:when>
+			<c:otherwise>
+				<nav class="mt-1 mb-3">
+				    <ul class="nav nav-fill">
+				        <li class="nav-item"><a href="/main/kinds_view?kinds=korean" class="nav-link text-white font-weight-bold">분 식</a></li>
+				        <li class="nav-item"><a href="/main/kinds_view?kinds=chickenpizza" class="nav-link text-white font-weight-bold">치킨 / 피자</a></li>
+				       	<li class="nav-item"><a href="/main/kinds_view?kinds=chinese" class="nav-link text-white font-weight-bold">중 식</a></li>
+				        <li class="nav-item"><a href="/main/kinds_view?kinds=japanese" class="nav-link text-white font-weight-bold">일식 / 돈가츠</a></li>
+				        <li class="nav-item"><a href="/main/kinds_view?kinds=nightfood" class="nav-link text-white font-weight-bold">야 식</a></li>
+				        <li class="nav-item"><a href="/main/kinds_view?kinds=dessert" class="nav-link text-white font-weight-bold">디저트</a></li>
+				    </ul>
+				</nav>
+			</c:otherwise>
+		</c:choose>
 		<section class="contents">
 			<jsp:include page="../${viewName }.jsp" />
 		</section>

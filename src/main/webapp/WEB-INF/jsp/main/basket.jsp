@@ -36,11 +36,22 @@
 	
 	<div class="total mt-3 bgGray d-flex justify-content-between p-3">
 		<strong>총 주문 금액</strong>
-		<strong><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${totalPrice}" />원</strong>
+		<c:if test="${empty basketList }">
+			<strong><fmt:setLocale value="ko_KR"/>0 원</strong>
+		</c:if>
+		<c:if test="${not empty basketList }">
+			<strong><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${totalPrice}" />원</strong>
+		</c:if>
 	</div>
 	
 	<div class="order my-3">
-		<a href="/main/order_view" class="btn bgYellow w-100 fontJua orderBtn text-dark">${totalPrice} 배달 주문하기</a>
+		<c:if test="${empty basketList }">
+			<button type="button" disabled="disabled" class="btn bg-secondary w-100 fontJua orderBtn text-white" onclick="location.href='/main/order_view'">주문 불가</button>
+		</c:if>
+		<c:if test="${not empty basketList }">
+			<button type="button" class="btn bgYellow w-100 fontJua orderBtn text-dark" onclick="location.href='/main/order_view'">${totalPrice }배달 주문하기</button>
+		</c:if>
+		
 	</div>
 	<div>
 </div>

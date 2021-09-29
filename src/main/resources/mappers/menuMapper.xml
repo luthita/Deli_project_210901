@@ -41,7 +41,7 @@
 	
 	<select id="selectStoreIdByMenuId" resultType="int">
     	SELECT
-    		`storeId`
+    		distinct `storeId`
     	FROM
     		`menu`
     	WHERE
