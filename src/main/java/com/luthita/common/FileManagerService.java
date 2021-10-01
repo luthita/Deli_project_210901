@@ -16,7 +16,8 @@ public class FileManagerService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 실제 이미지가 (컴퓨터에) 저장될 경로
-	public final static String FILE_UPLOAD_PATH = "C:\\Users\\luthi\\OneDrive\\바탕 화면\\Web개발\\07. Final_project\\Deli\\workspace\\Delieats\\images/";
+	// public final static String FILE_UPLOAD_PATH = "C:\\Users\\luthi\\OneDrive\\바탕 화면\\Web개발\\07. Final_project\\Deli\\workspace\\Delieats\\images/";
+	public final static String FILE_UPLOAD_PATH = "/home/ec2-user/upload_images/";
 	
 	// 이미지를 저장 -> URL Path 리턴
 	public String saveFile(int userId, MultipartFile file) throws IOException {

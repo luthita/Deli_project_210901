@@ -20,7 +20,7 @@ public class UserController {
 	public String signUpView(Model model) {
 		model.addAttribute("viewName","user/sign_up");
 		
-		return "template/layout";
+		return "user/sign_up";
 	}
 	
 	@RequestMapping("/sign_out")
